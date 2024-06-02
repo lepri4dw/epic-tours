@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
-import {Link as RouterLink, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {LoginMutation} from '../../types';
-import {Alert, Avatar, Box, Container, Grid, Link, TextField, Typography} from '@mui/material';
+import {Alert, Avatar, Box, Container, Grid, TextField, Typography} from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import {useAppDispatch, useAppSelector} from '../../app/hooks';
 import {selectLoginError, selectLoginLoading} from './usersSlice';
-import {googleLogin, login} from './usersThunks';
+import {login} from './usersThunks';
 import {LoadingButton} from "@mui/lab";
-import {GoogleLogin} from "@react-oauth/google";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -23,11 +22,6 @@ const Login = () => {
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
     setState(prevState => ({...prevState, [name]: value}));
-  };
-
-  const googleLoginHandler = async (credential: string) => {
-    await dispatch(googleLogin(credential)).unwrap();
-    navigate('/');
   };
 
   const submitFormHandler = async (event: React.FormEvent) => {
@@ -52,18 +46,6 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box sx={{ pt: 2 }}>
-          <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              if (credentialResponse.credential) {
-                void googleLoginHandler(credentialResponse.credential);
-              }
-            }}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-          />
-        </Box>
         {error && (
           <Alert severity="error" sx={{mt: 3, width: '100%'}}>
             {error.error}
@@ -101,13 +83,6 @@ const Login = () => {
           >
             Sign In
           </LoadingButton>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link component={RouterLink} to="/register" variant="body2">
-                Or sign up
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
     </Container>
