@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+.section {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+}
+
+.section-title {
+    font-weight: bold !important;
+    margin-bottom: 20px !important;
+}
+
+.section-button {
+    display: block !important;
+    margin: 20px auto !important;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
