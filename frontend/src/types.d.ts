@@ -30,3 +30,14 @@ export interface RegisterResponse {
   message: string;
   user: User;
 }
+
+export interface Destination {
+  _id: string;
+  name: string;
+  image: string | null;
+}
+
+export interface DestinationMutation {
+  name: string;
+  image: string | null;
+}

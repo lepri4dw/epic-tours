@@ -2,6 +2,7 @@ import User from "./models/User";
 import mongoose from "mongoose";
 import config from "./config";
 import crypto from "crypto";
+import Destination from "./models/Destination";
 
 const run = async () => {
   await mongoose.connect(config.db);
@@ -9,6 +10,7 @@ const run = async () => {
 
   try {
     await db.dropCollection('users');
+    await db.dropCollection('destinations');
   } catch (e) {
     console.log('Collections were not present, skipping drop...');
   }
@@ -19,6 +21,17 @@ const run = async () => {
     token: crypto.randomUUID(),
     role: 'admin',
   });
+
+  await Destination.create({
+    name: 'Kyrgyzstan',
+    image: 'fixtures/kgz.jpg',
+  }, {
+    name: 'Uzbekistan',
+    image: 'fixtures/uzb.jpg'
+  }, {
+    name: 'Kazakhstan',
+    image: 'fixtures/kzh.jpg'
+  },)
 
   await db.close();
 };

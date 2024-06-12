@@ -1,9 +1,25 @@
 export interface IUser {
   username: string;
-  displayName: string
   password: string;
   token: string;
   role: string;
-  avatar: string;
-  googleId?: string;
+}
+
+export interface IDestination {
+  name: string;
+  image: string;
+}
+
+export interface ITour {
+  title: string;
+  images: string[];
+  price: number;
+  description: string;
+  route: string;
+  duration: number;
+  schedule: {
+    title: string;
+    description: string;
+    dayNumber: number;
+  }[];
 }
