@@ -267,10 +267,10 @@ const PopularPackages = () => {
 
 const Tours = () => {
   return (
-    <div>
+    <Container>
       <Destinations/>
       <PopularPackages />
-    </div>
+    </Container>
   );
 };
 

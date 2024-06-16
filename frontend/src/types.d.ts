@@ -35,9 +35,13 @@ export interface Destination {
   _id: string;
   name: string;
   image: string | null;
+  rows: number;
+  cols: number;
 }
 
 export interface DestinationMutation {
   name: string;
   image: string | null;
+  rows: string;
+  cols: string;
 }

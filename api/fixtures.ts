@@ -25,7 +25,14 @@ const run = async () => {
   await Destination.create({
     name: 'Kyrgyzstan',
     image: 'fixtures/kgz.jpg',
+    cols: 2,
   }, {
+    name: 'Tajikistan',
+    image: 'fixtures/tjk.jpg'
+  }, {
+    name: 'Turkmenistan',
+    image: 'fixtures/trk.jpg'
+  },  {
     name: 'Uzbekistan',
     image: 'fixtures/uzb.jpg'
   }, {

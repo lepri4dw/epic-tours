@@ -3,7 +3,6 @@ import { IDestination} from '../types';
 
 const Schema = mongoose.Schema;
 
-
 const DestinationSchema = new Schema<IDestination>(
   {
     name: {
@@ -14,6 +13,8 @@ const DestinationSchema = new Schema<IDestination>(
       type: String,
       required: true,
     },
+    rows: Number,
+    cols: Number,
   },
 );
 
