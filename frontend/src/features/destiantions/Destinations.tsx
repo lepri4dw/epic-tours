@@ -25,20 +25,16 @@ const Destinations: React.FC = () => {
     dispatch(fetchDestinations());
   }, [dispatch]);
 
-  if (loading) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-        <CircularProgress/>
-      </Box>
-    );
-  }
-
   return (
     <Box sx={{width: '100%', height: '100%', padding: 2}}>
-      <Typography variant="h4" gutterBottom style={{textAlign: 'center'}}>
+      <Typography variant="h4" gutterBottom style={{textAlign: 'center'}} className="section-title">
         TOP NOTCH DESTINATIONS
       </Typography>
-      <ImageList sx={{margin: '0 auto', padding: '30px'}} variant="quilted" cols={3} rowHeight={315} gap={30}>
+      {loading ?
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <CircularProgress/>
+        </Box> :
+      <ImageList sx={{margin: '0 auto', padding: '10px 30px'}} variant="quilted" cols={3} rowHeight={315} gap={30}>
         {destinations.map((destination) => (
           <ImageListItem
             key={destination._id}
@@ -83,7 +79,7 @@ const Destinations: React.FC = () => {
             />
           </ImageListItem>
         ))}
-      </ImageList>
+      </ImageList>}
     </Box>
   );
 };

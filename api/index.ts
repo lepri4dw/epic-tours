@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import config from "./config";
 import usersRouter from "./routers/users";
 import destinationsRouter from "./routers/ destinations";
+import toursRouter from "./routers/tours";
 
 const app = express();
 const port = 8000;
@@ -13,6 +14,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use('/users', usersRouter);
 app.use('/destinations', destinationsRouter);
+app.use('/tours', toursRouter);
 const run = async () => {
   mongoose.set('strictQuery', false);
   await mongoose.connect(config.db);

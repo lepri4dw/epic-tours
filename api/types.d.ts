@@ -21,6 +21,7 @@ export interface ITour {
   price: number;
   description: string;
   route: string;
+  places: string;
   duration: number;
   schedule: {
     title: string;

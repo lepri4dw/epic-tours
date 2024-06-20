@@ -41,7 +41,40 @@ export interface Destination {
 
 export interface DestinationMutation {
   name: string;
-  image: string | null;
+  image: File | null;
   rows: string;
   cols: string;
+}
+
+export interface Tour {
+  _id: string;
+  title: string;
+  images: string[];
+  destinations: Destination[];
+  price: number;
+  description: string;
+  route: string | null;
+  places: string;
+  duration: number;
+  schedule: {
+    title: string;
+    description: string;
+    dayNumber: number;
+  }[];
+}
+
+export interface TourMutation {
+  title: string;
+  images: File[] | null;
+  destinations: string[];
+  price: string;
+  description: string;
+  route: File | null;
+  places: string;
+  duration: string;
+  schedule: {
+    title: string;
+    description: string;
+    dayNumber: string;
+  }[];
 }

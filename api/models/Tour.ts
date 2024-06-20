@@ -20,8 +20,7 @@ const TourSchema = new Schema<ITour>(
       }
     },
     destinations: {
-      type: [Schema.Types.ObjectId],
-      ref: 'Destination',
+      type: [{ type: Schema.Types.ObjectId, ref: 'Destination' }],
       required: true,
       validate: {
         validator: async (values: Types.ObjectId[]) => {
@@ -44,21 +43,19 @@ const TourSchema = new Schema<ITour>(
       type: String,
       required: true,
     },
-    route: {
-      type: String,
-      required: true,
-    },
+    route: String,
+    places: String,
     duration: {
       type: Number,
       required: true,
     },
     schedule: [{
-      title: {type: String, required: true},
-      description: {type: String, required: true},
-      dayNumber: {type: Number, required: true},
+      title: {type: String},
+      description: {type: String},
+      dayNumber: {type: Number},
     }],
   },
 );
 
-const Tour = mongoose.model<ITour>('Destination', TourSchema);
+const Tour = mongoose.model<ITour>('Tour', TourSchema);
 export default Tour;

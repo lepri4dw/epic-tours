@@ -9,7 +9,7 @@ const destinationsRouter = express.Router();
 
 destinationsRouter.get('/', async (req, res, next) => {
   try {
-    const destinations = await Destination.find();
+    const destinations = await Destination.find().sort({ cols: -1 });
 
     return res.send(destinations);
   } catch (e) {

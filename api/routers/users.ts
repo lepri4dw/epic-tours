@@ -1,11 +1,4 @@
 import express from "express";
-// import mongoose from "mongoose";
-// import config from "../config";
-// import crypto from "crypto";
-// import * as fs from "fs";
-// import fetch from 'node-fetch';
-// import path from "path";
-// import {imagesUpload} from "../multer";
 import User from "../models/User";
 
 const usersRouter = express.Router();
@@ -33,20 +26,6 @@ usersRouter.post('/sessions', async (req, res, next) => {
   }
 
 });
-
-// const downloadFile = async (url: string, filename: string) => {
-//   const response = await fetch(url);
-//   const fileStream = fs.createWriteStream(filename);
-//   await new Promise<void>((resolve, reject) => {
-//     response.body.pipe(fileStream);
-//     response.body.on("error", (err) => {
-//       reject(err);
-//     });
-//     fileStream.on("finish", function () {
-//       resolve();
-//     });
-//   });
-// };
 
 usersRouter.delete('/sessions', async (req, res, next) => {
   try {

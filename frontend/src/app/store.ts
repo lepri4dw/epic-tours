@@ -4,6 +4,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from 'redux-persist/es/constants';
 import {destinationsReducer} from "../features/destiantions/destinationsSlice";
+import {toursReducer} from "../features/tours/toursSlice";
 
 const usersPersistConfig = {
   key: 'project:users',
@@ -14,6 +15,7 @@ const usersPersistConfig = {
 const rootReducer = combineReducers({
   users: persistReducer(usersPersistConfig, usersReducer),
   destinations: destinationsReducer,
+  tours: toursReducer,
 });
 
 export const store = configureStore({
