@@ -39,6 +39,10 @@ export interface Destination {
   cols: number;
 }
 
+export interface DestinationsWithCount extends Destination {
+  tourCount: number;
+}
+
 export interface DestinationMutation {
   name: string;
   image: File | null;

@@ -28,9 +28,9 @@ const AppToolbar = () => {
             <Grid item>
               <Box display="flex" alignItems="center">
                 <Phone sx={{ mr: 1 }} />
-                <Typography>+996558775388 720024,</Typography>
+                <Typography>+996558775388</Typography>
                 <LocationOn sx={{ mx: 1 }} />
-                <Typography>Kyrgyzstan, Bishkek, Frunze St., Tula №14</Typography>
+                <Typography>720024, Kyrgyzstan, Bishkek, Frunze St., Tula №14</Typography>
               </Box>
             </Grid>
           </Grid>

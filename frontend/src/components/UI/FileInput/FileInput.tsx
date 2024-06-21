@@ -1,15 +1,21 @@
 import React, {useRef, useState} from 'react';
-import { Button, Grid, TextField } from '@mui/material';
+import {Button, Grid, TextField} from '@mui/material';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name: string;
   label: string;
-  error?: boolean;
-  helperText?: string;
+  type?: string;
+  errorCheck: (fieldName: string) => string | undefined;
 }
 
-const FileInput: React.FC<Props> = ({onChange, name, label, error, helperText}) => {
+const FileInput: React.FC<Props> = ({
+                                      onChange,
+                                      name,
+                                      label,
+                                      type,
+                                      errorCheck,
+                                    }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [filename, setFilename] = useState('');
@@ -20,7 +26,6 @@ const FileInput: React.FC<Props> = ({onChange, name, label, error, helperText}) 
     } else {
       setFilename('');
     }
-
     onChange(e);
   };
 
@@ -35,6 +40,7 @@ const FileInput: React.FC<Props> = ({onChange, name, label, error, helperText}) 
       <input
         style={{display: 'none'}}
         type="file"
+        accept={type}
         name={name}
         onChange={onFileChange}
         ref={inputRef}
@@ -42,14 +48,20 @@ const FileInput: React.FC<Props> = ({onChange, name, label, error, helperText}) 
       <Grid container direction="row" spacing={2} alignItems="center">
         <Grid item xs>
           <TextField
+            error={Boolean(errorCheck(name))}
+            helperText={errorCheck(name)}
+            variant="standard"
             disabled
             label={label}
             value={filename}
-            onClick={activateInput} error={error} helperText={helperText}
+            onClick={activateInput}
+            sx={{width: '100%'}}
           />
         </Grid>
         <Grid item>
-          <Button type="button" variant="contained" onClick={activateInput}>Browse</Button>
+          <Button type="button" variant="contained" onClick={activateInput}>
+            Выбрать
+          </Button>
         </Grid>
       </Grid>
     </>

@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { Destination, ValidationError } from '../../types';
+import {DestinationsWithCount, ValidationError} from '../../types';
 import { fetchDestinations, createDestination, deleteDestination, updateDestination } from './destinationsThunks';
 
 interface DestinationsState {
-  items: Destination[],
+  items: DestinationsWithCount[],
   fetchLoading: boolean;
   submitting: boolean;
   error: ValidationError | null;
@@ -22,7 +22,11 @@ const initialState: DestinationsState = {
 const destinationsSlice = createSlice({
   name: 'destinations',
   initialState,
-  reducers: {},
+  reducers: {
+    cleanError: (state) => {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchDestinations.pending, (state) => {
       state.fetchLoading = true;
@@ -78,3 +82,4 @@ export const selectDestinationsFetching = (state: RootState) => state.destinatio
 export const selectDestinationSubmitting = (state: RootState) => state.destinations.submitting;
 export const selectDestinationError = (state: RootState) => state.destinations.error;
 export const selectDestinationDeleting = (state: RootState) => state.destinations.deleteLoading;
+export const { cleanError } = destinationsSlice.actions;

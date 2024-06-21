@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {
-  Container,
   Grid,
   Typography,
   Card,
@@ -14,7 +13,6 @@ import {
 import {styled} from '@mui/system';
 import '../../App.css';
 import {AccessTime, LocationOn} from '@mui/icons-material';
-import Destinations from "../destiantions/Destinations";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {Tour} from "../../types";
 import {useNavigate} from "react-router-dom";
@@ -97,60 +95,55 @@ const Tours = () => {
   }, [dispatch]);
 
   return (
-    <>
-      <Container>
-        <Destinations/>
-        <Box className="section">
-          <Typography variant="h4" align="center" gutterBottom className="section-title">
-            POPULAR TOURS
-          </Typography>
-          {loading ?
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <CircularProgress/>
-            </Box> :
-            <Grid container spacing={3}>
-              {tours.map(tour => (
-                <Grid item xs={12} sm={6} md={4}>
-                  <CustomCard className="card" onClick={() => navigate(`/tours/${tour._id}`)}>
-                    <CardActionArea>
-                      <ImageCardMedia
-                        title={tour.title}
-                        image={`${apiURL + '/' + tour.images[0]}`}
-                      />
-                      <PriceTag>${tour.price} / <span style={{fontSize: '14px'}}>per person</span></PriceTag>
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div" sx={{marginTop: '16px'}}>
-                          {tour.title}
+    <Box className="section">
+      <Typography variant="h4" align="center" gutterBottom className="section-title">
+        POPULAR TOURS
+      </Typography>
+      {loading ?
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <CircularProgress/>
+        </Box> :
+        <Grid container spacing={3}>
+          {tours.map(tour => (
+            <Grid item xs={12} sm={6} md={4}>
+              <CustomCard className="card" onClick={() => navigate(`/tours/${tour._id}`)}>
+                <CardActionArea>
+                  <ImageCardMedia
+                    title={tour.title}
+                    image={`${apiURL + '/' + tour.images[0]}`}
+                  />
+                  <PriceTag>${tour.price} / <span style={{fontSize: '14px'}}>per person</span></PriceTag>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div" sx={{marginTop: '16px'}}>
+                      {tour.title}
+                    </Typography>
+                    <InfoBox>
+                      <Box display="flex" alignItems="center" sx={{flexShrink: 0, marginRight: '10px'}}>
+                        <AccessTime fontSize="small"/>
+                        <Typography variant="body2" color="inherit" marginLeft={1}>
+                          {tour.duration}D/{tour.duration - 1}N
                         </Typography>
-                        <InfoBox>
-                          <Box display="flex" alignItems="center" sx={{flexShrink: 0, marginRight: '10px'}}>
-                            <AccessTime fontSize="small"/>
-                            <Typography variant="body2" color="inherit" marginLeft={1}>
-                              {tour.duration}D/{tour.duration - 1}N
-                            </Typography>
-                          </Box>
-                          <Box display="flex" alignItems="center" sx={{flex: '1 1 0', overflow: 'hidden'}}>
-                            <LocationOn fontSize="small"/>
-                            <Typography variant="body2" color="inherit" marginLeft={1}
-                                        sx={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                              {tour.destinations.map(destination => destination.name).join(', ')}
-                            </Typography>
-                          </Box>
-                        </InfoBox>
-                        <Description variant="body2" color="text.secondary" marginTop={2}>
-                          {tour.description}
-                        </Description>
-                      </CardContent>
-                    </CardActionArea>
-                  </CustomCard>
-                </Grid>
-              ))}
+                      </Box>
+                      <Box display="flex" alignItems="center" sx={{flex: '1 1 0', overflow: 'hidden'}}>
+                        <LocationOn fontSize="small"/>
+                        <Typography variant="body2" color="inherit" marginLeft={1}
+                                    sx={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                          {tour.destinations.map(destination => destination.name).join(', ')}
+                        </Typography>
+                      </Box>
+                    </InfoBox>
+                    <Description variant="body2" color="text.secondary" marginTop={2}>
+                      {tour.description}
+                    </Description>
+                  </CardContent>
+                </CardActionArea>
+              </CustomCard>
             </Grid>
-          }
-          <CustomButton variant="contained" className="section-button">VIEW ALL TOURS</CustomButton>
-        </Box>
-      </Container>
-    </>
+          ))}
+        </Grid>
+      }
+      <CustomButton variant="contained" className="section-button">VIEW ALL TOURS</CustomButton>
+    </Box>
   );
 };
 

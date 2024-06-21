@@ -9,7 +9,6 @@ import {
   Typography
 } from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import {Destination} from "../../types";
 import {fetchDestinations} from "./destinationsThunks";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {apiURL} from "../../constants";
@@ -17,7 +16,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 
 const Destinations: React.FC = () => {
   const dispatch = useAppDispatch();
-  const destinations: Destination[] = useAppSelector(selectDestinations);
+  const destinations = useAppSelector(selectDestinations);
   const loading = useAppSelector(selectDestinationsFetching);
   const navigate = useNavigate();
 
@@ -60,7 +59,7 @@ const Destinations: React.FC = () => {
             />
             <ImageListItemBar
               title={destination.name}
-              subtitle={'1 Tours'}
+              subtitle={`${destination.tourCount} Tours`}
               actionIcon={
                 <LocationOnOutlinedIcon
                   sx={{color: 'white', marginRight: 2, fontSize: '2.5rem', marginBottom: '20px'}}/>

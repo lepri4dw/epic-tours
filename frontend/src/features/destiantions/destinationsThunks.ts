@@ -1,12 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axiosApi from "../../axiosApi";
-import {Destination, DestinationMutation, ValidationError} from "../../types";
+import {DestinationMutation, DestinationsWithCount, ValidationError} from "../../types";
 import {isAxiosError} from "axios";
 
 export const fetchDestinations = createAsyncThunk(
   'destinations/fetchAll',
   async () => {
-    const response = await axiosApi.get<Destination[]>('/destinations');
+    const response = await axiosApi.get<DestinationsWithCount[]>('/destinations');
     return response.data;
   }
 );

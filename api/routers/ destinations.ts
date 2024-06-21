@@ -4,6 +4,7 @@ import auth from "../middleware/auth";
 import {imagesUpload} from "../multer";
 import permit from "../middleware/permit";
 import mongoose from "mongoose";
+import Tour from "../models/Tour";
 
 const destinationsRouter = express.Router();
 
@@ -11,7 +12,15 @@ destinationsRouter.get('/', async (req, res, next) => {
   try {
     const destinations = await Destination.find().sort({ cols: -1 });
 
-    return res.send(destinations);
+    const destinationsWithCount = await Promise.all(destinations.map(async (destination) => {
+      const tourCount = await Tour.countDocuments({ destinations: destination._id });
+      return {
+        ...destination.toObject(),
+        tourCount
+      };
+    }));
+
+    return res.send(destinationsWithCount);
   } catch (e) {
     return next(e);
   }
