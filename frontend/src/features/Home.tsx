@@ -3,6 +3,7 @@ import Destinations from "./destiantions/Destinations";
 import Tours from "./tours/Tours";
 import background from "../assets/images/main-bg.png";
 import {styled} from "@mui/system";
+import {useNavigate} from "react-router-dom";
 
 const CustomButton = styled(Button)({
   backgroundColor: '#FF6F61',
@@ -14,6 +15,8 @@ const CustomButton = styled(Button)({
 });
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Box sx={{position: 'relative', height: '85vh'}}>
@@ -50,7 +53,7 @@ const Home = () => {
           >
             Epic Tours your reliable partner <p style={{fontSize: '3rem', margin: '0'}}>to provide you with exceptional service each and every time!</p>
           </Typography>
-          <CustomButton variant="contained" size="large">
+          <CustomButton variant="contained" size="large" onClick={() => navigate('/tours')}>
             View Tours
           </CustomButton>
         </Container>

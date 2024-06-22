@@ -26,11 +26,25 @@ destinationsRouter.get('/', async (req, res, next) => {
   }
 });
 
+destinationsRouter.get('/:id', async (req, res, next) => {
+  try {
+    const destination = await Destination.findById(req.params.id);
+    if (!destination) {
+      return res.sendStatus(404);
+    }
+    return res.send(destination);
+  } catch (e) {
+    return next(e);
+  }
+});
+
 destinationsRouter.post('/', auth, permit('admin'), imagesUpload.single('image'), async (req, res, next) => {
   try {
     const destination = await Destination.create({
       name: req.body.name,
       image: req.file ? req.file.filename : null,
+      rows: parseInt(req.body.rows) || 1,
+      cols: parseInt(req.body.cols) || 1,
     });
 
     return res.send(destination);
@@ -70,6 +84,8 @@ destinationsRouter.put('/:id', auth, permit('admin'), imagesUpload.single('image
     if (req.file) {
       destination.image = req.file.filename;
     }
+    destination.rows = parseInt(req.body.rows) || 1
+    destination.cols = parseInt(req.body.cols) || 1
 
     await destination.save();
 

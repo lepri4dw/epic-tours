@@ -34,6 +34,8 @@ export const createTour = createAsyncThunk<void, TourMutation, { rejectValue: Va
                 formData.append('images', image);
               }
             });
+          } if (key === 'destinations' || key === 'schedule') {
+            formData.append(key, JSON.stringify(value));
           } else if (!Array.isArray(value)) {
             formData.append(key, value);
           }
@@ -65,6 +67,8 @@ export const updateTour = createAsyncThunk<void, { id: string, tour: TourMutatio
                 formData.append('images', image);
               }
             });
+          } if (key === 'destinations' || key === 'schedule') {
+            formData.append(key, JSON.stringify(value));
           } else if (!Array.isArray(value)) {
             formData.append(key, value);
           }

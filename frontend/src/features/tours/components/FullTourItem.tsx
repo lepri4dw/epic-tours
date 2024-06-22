@@ -1,8 +1,8 @@
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {selectOneTour, selectOneTourFetching} from "../toursSlice";
-import {useParams} from "react-router-dom";
+import {selectOneTour, selectOneTourFetching, selectTourDeleting} from "../toursSlice";
+import {useNavigate, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {fetchOneTour} from "../toursThunks";
+import {deleteTour, fetchOneTour} from "../toursThunks";
 import {
   Box,
   CircularProgress,
@@ -16,12 +16,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Card, CardContent
+  Card, CardContent, Button
 } from "@mui/material";
 import {apiURL} from "../../../constants";
 import Carousel from 'react-material-ui-carousel';
 import ImageModal from "../../../components/UI/ImageModal/ImageModal";
 import {styled} from "@mui/system";
+import {selectUser} from "../../users/usersSlice";
+import {LoadingButton} from "@mui/lab";
 
 const StyledTableRow = styled(TableRow)(({theme}) => ({
   '&:hover': {
@@ -53,13 +55,23 @@ const FullTourItem = () => {
   const tour = useAppSelector(selectOneTour);
   const loading = useAppSelector(selectOneTourFetching);
   const [selectedImage, setSelectedImage] = useState<string>('');
+  const deleteLoading = useAppSelector(selectTourDeleting);
+  const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    if (window.confirm('Подтвердите удаление этого объявления')) {
+      await dispatch(deleteTour(id));
+      navigate('/');
+    }
+  }
 
   const handleOpen = (image: string) => {
     setSelectedImage(apiURL + '/' + image);
     setOpen(true);
   }
-  const handleClose = () => setOpen(false);
 
+  const handleClose = () => setOpen(false);
   useEffect(() => {
     dispatch(fetchOneTour(id));
   }, [dispatch, id]);
@@ -68,6 +80,30 @@ const FullTourItem = () => {
     <Container>
       {loading ? <CircularProgress/> : tour && (
         <Grid mt={3} container spacing={3} direction="column">
+          {user && user.role === 'admin' && <Grid item container sx={{ margin: '0 auto 16px'}} alignItems="center">
+            <Grid item sx={{ ml: 1 }}>
+              <LoadingButton
+                color="error"
+                variant="contained"
+                loading={Boolean(deleteLoading)}
+                disabled={Boolean(deleteLoading)}
+                onClick={handleDelete}
+                size="large"
+              >
+                <span>Удалить</span>
+              </LoadingButton>
+            </Grid>
+            <Grid item sx={{ ml: 1 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => navigate(`/tours/edit/${id}`)}
+                size="large"
+              >
+                Редактировать
+              </Button>
+            </Grid>
+          </Grid>}
           <Grid item xs={12}>
             <Typography variant="h3" align="center">{tour.title}</Typography>
           </Grid>

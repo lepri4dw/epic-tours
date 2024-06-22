@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Grid, TextField} from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import {DestinationMutation} from "../../../types";
@@ -33,6 +33,12 @@ const DestinationForm: React.FC<Props> = ({
     await onSubmit(state);
     setState(initialState);
   };
+
+  useEffect(() => {
+    if (existingDestination) {
+      setState(existingDestination);
+    }
+  }, [existingDestination]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;

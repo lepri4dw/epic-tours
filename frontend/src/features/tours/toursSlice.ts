@@ -32,23 +32,25 @@ const toursSlice = createSlice({
       .addCase(fetchTours.pending, (state) => {
         state.fetchLoading = true;
       })
-      .addCase(fetchTours.fulfilled, (state, { payload: tours }) => {
+      .addCase(fetchTours.fulfilled, (state, {payload: tours}) => {
         state.fetchLoading = false;
         state.items = tours;
       })
       .addCase(fetchTours.rejected, (state) => {
         state.fetchLoading = false;
       })
+
       .addCase(fetchOneTour.pending, (state) => {
         state.fetchOneLoading = true;
       })
-      .addCase(fetchOneTour.fulfilled, (state, { payload: tour }) => {
+      .addCase(fetchOneTour.fulfilled, (state, {payload: tour}) => {
         state.fetchOneLoading = false;
         state.oneTour = tour;
       })
       .addCase(fetchOneTour.rejected, (state) => {
         state.fetchOneLoading = false;
       })
+
       .addCase(createTour.pending, (state) => {
         state.error = null;
         state.submitting = true;
@@ -56,7 +58,8 @@ const toursSlice = createSlice({
       .addCase(createTour.fulfilled, (state) => {
         state.submitting = false;
       })
-      .addCase(createTour.rejected, (state, { payload: error }) => {
+
+      .addCase(createTour.rejected, (state, {payload: error}) => {
         state.error = error || null;
         state.submitting = false;
       })
@@ -64,14 +67,16 @@ const toursSlice = createSlice({
         state.error = null;
         state.submitting = true;
       })
+
       .addCase(updateTour.fulfilled, (state) => {
         state.submitting = false;
       })
-      .addCase(updateTour.rejected, (state, { payload: error }) => {
+      .addCase(updateTour.rejected, (state, {payload: error}) => {
         state.error = error || null;
         state.submitting = false;
       })
-      .addCase(deleteTour.pending, (state, { meta: { arg: id } }) => {
+
+      .addCase(deleteTour.pending, (state, {meta: {arg: id}}) => {
         state.deleteLoading = id;
       })
       .addCase(deleteTour.fulfilled, (state) => {

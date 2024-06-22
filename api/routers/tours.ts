@@ -29,21 +29,25 @@ toursRouter.get('/:id', async (req, res, next) => {
   }
 });
 
-toursRouter.post('/', auth, permit('admin'), imagesUpload.array('images', 50), imagesUpload.single('route'), async (req, res, next) => {
+toursRouter.post('/', auth, permit('admin'), imagesUpload.array('images', 50), async (req, res, next) => {
   try {
     const files = req.files as UploadedFile[];
+
     const images = files.map(file => file.filename);
+    const destinations = JSON.parse(req.body.destinations);
+    const schedule = JSON.parse(req.body.schedule);
+
 
     const tour = await Tour.create({
       title: req.body.title,
       images,
-      destinations: req.body.destinations,
+      destinations,
       price: parseFloat(req.body.price),
       description: req.body.description,
-      route: req.file ? req.file.filename : null,
+      route: null,
       places: req.body.places,
       duration: parseInt(req.body.duration),
-      schedule: req.body.schedule,
+      schedule,
     });
 
     return res.send(tour);
@@ -56,7 +60,7 @@ toursRouter.post('/', auth, permit('admin'), imagesUpload.array('images', 50), i
   }
 });
 
-toursRouter.put('/:id', auth, permit('admin'), imagesUpload.array('images', 50), imagesUpload.single('route'), async (req, res, next) => {
+toursRouter.put('/:id', auth, permit('admin'), imagesUpload.array('images', 50), async (req, res, next) => {
   try {
     const tour = await Tour.findById(req.params.id);
     if (!tour) {
@@ -65,21 +69,20 @@ toursRouter.put('/:id', auth, permit('admin'), imagesUpload.array('images', 50),
 
     const files = req.files as UploadedFile[];
     const images = files.map(file => file.filename);
+    const destinations = JSON.parse(req.body.destinations);
+    const schedule = JSON.parse(req.body.schedule);
 
     tour.title = req.body.title || tour.title;
     tour.price = req.body.price ? parseFloat(req.body.price) : tour.price;
     tour.description = req.body.description || tour.description;
+    tour.destinations = req.body.destinations ? destinations : tour.destinations;
     if (req.file) {
       tour.route = req.file.filename;
     }
     tour.places = req.body.places;
     tour.duration = req.body.duration ? parseInt(req.body.duration) : tour.duration;
-    tour.schedule = req.body.schedule ? req.body.schedule.map((scheduleItem: any) => ({
-      title: scheduleItem.title,
-      description: scheduleItem.description,
-      dayNumber: scheduleItem.dayNumber,
-    })) : tour.schedule;
-    tour.images = [...tour.images, ...images];
+    tour.schedule = req.body.schedule ? schedule : tour.schedule;
+    tour.images = images
 
     await tour.save();
     return res.send(tour);

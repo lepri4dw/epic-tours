@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react';
-import {Button, Grid, TextField} from '@mui/material';
+import React, { useRef, useState } from 'react';
+import { Grid, TextField, Button } from '@mui/material';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -7,6 +7,7 @@ interface Props {
   label: string;
   type?: string;
   errorCheck: (fieldName: string) => string | undefined;
+  multiple?: boolean;
 }
 
 const FileInput: React.FC<Props> = ({
@@ -15,16 +16,18 @@ const FileInput: React.FC<Props> = ({
                                       label,
                                       type,
                                       errorCheck,
+                                      multiple = false, // значение по умолчанию - false
                                     }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [filename, setFilename] = useState('');
+  const [filenames, setFilenames] = useState<string[]>([]);
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFilename(e.target.files[0].name);
+    if (e.target.files) {
+      const selectedFiles = Array.from(e.target.files).map(file => file.name);
+      setFilenames(selectedFiles);
     } else {
-      setFilename('');
+      setFilenames([]);
     }
     onChange(e);
   };
@@ -38,12 +41,13 @@ const FileInput: React.FC<Props> = ({
   return (
     <>
       <input
-        style={{display: 'none'}}
+        style={{ display: 'none' }}
         type="file"
         accept={type}
         name={name}
         onChange={onFileChange}
         ref={inputRef}
+        multiple={multiple}
       />
       <Grid container direction="row" spacing={2} alignItems="center">
         <Grid item xs>
@@ -53,9 +57,9 @@ const FileInput: React.FC<Props> = ({
             variant="standard"
             disabled
             label={label}
-            value={filename}
+            value={filenames.join(', ')} // объединение имен файлов в строку через запятую
             onClick={activateInput}
-            sx={{width: '100%'}}
+            sx={{ width: '100%' }}
           />
         </Grid>
         <Grid item>
