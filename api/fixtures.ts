@@ -4,6 +4,7 @@ import config from "./config";
 import crypto from "crypto";
 import Destination from "./models/Destination";
 import Tour from "./models/Tour";
+import Notification from "./models/Notification";
 
 const run = async () => {
   await mongoose.connect(config.db);
@@ -13,6 +14,7 @@ const run = async () => {
     await db.dropCollection('users');
     await db.dropCollection('destinations');
     await db.dropCollection('tours');
+    await db.dropCollection('notifications')
   } catch (e) {
     console.log('Collections were not present, skipping drop...');
   }
@@ -112,6 +114,23 @@ const run = async () => {
       {title: 'Chon-Kemin-Cholpon-Ata/Boat ride –Karakol city (310 km/5-6hrs)', description: 'After breakfast transfer to Karakol city along the northern shore of Issyk-Kul lake. Lake Issyk Kul is the second-largest mountain lake in the world, after Titicaca. Located at an altitude of 1600m, it is a slightly saline lake with no outlet, surrounded completely by the Tien Shan Mountains. Some evidence suggests that ruins of an old trade center from 2nd century BC can be found under the water. We drive along the entire northern shore of the lake and make a stop half way, near Cholpon Ata, to take one hour boat ride in Yssyk-Kul lake. By late afternoon we arrive in Karakol city, where we stay for the night in the guesthouse', dayNumber: 4},
     ]
   });
+
+  await Notification.create(
+    {
+      name: 'Joe Biden',
+      email: 'joe@gmail.com',
+      phoneNumber: '+996555111222',
+      message: 'Why these tours are so cheap?',
+      isChecked: false,
+    },
+    {
+      name: 'Max Martin',
+      email: 'maxmartin@gmail.com',
+      phoneNumber: '+996523112233',
+      message: null,
+      isChecked: true,
+    },
+  );
 
   await db.close();
 };

@@ -82,3 +82,30 @@ export interface TourMutation {
     dayNumber: string;
   }[];
 }
+
+export interface IPagination<Type> {
+  [key: string]: Type[];
+  currentPage: number;
+  totalCount: number;
+}
+
+export interface ApiResponse<Type> {
+  message: 'string';
+  result: Type | IPagination<Type>;
+}
+
+export interface ApiNotification {
+  _id: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  message: string | null;
+  isChecked: boolean;
+}
+
+export interface INotification {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  message: string | null;
+}

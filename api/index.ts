@@ -5,6 +5,7 @@ import config from "./config";
 import usersRouter from "./routers/users";
 import destinationsRouter from "./routers/ destinations";
 import toursRouter from "./routers/tours";
+import notificationsRouter from "./routers/notifications";
 
 const app = express();
 const port = 8000;
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/users', usersRouter);
 app.use('/destinations', destinationsRouter);
 app.use('/tours', toursRouter);
+app.use('/notifications', notificationsRouter);
 const run = async () => {
   mongoose.set('strictQuery', false);
   await mongoose.connect(config.db);

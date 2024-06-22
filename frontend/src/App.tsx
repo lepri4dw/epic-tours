@@ -13,6 +13,7 @@ import NewTour from "./features/tours/components/NewTour";
 import EditTour from "./features/tours/components/EditTour";
 import EditDestination from "./features/destiantions/components/EditDestination";
 import ToursPage from "./features/tours/ToursPage";
+import NotificationsAdmin from "./features/notifications/NotificationsAdmin";
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -33,6 +34,7 @@ function App() {
             <Route path="/destinations/edit/:id" element={<ProtectedRoute isAllowed={user && user.role == 'admin'}><EditDestination/></ProtectedRoute>}/>
             <Route path="/tours/new" element={<ProtectedRoute isAllowed={user && user.role == 'admin'}><NewTour/></ProtectedRoute>}/>
             <Route path="/tours/edit/:id" element={<ProtectedRoute isAllowed={user && user.role == 'admin'}><EditTour/></ProtectedRoute>}/>
+            <Route path="/admin/notifications" element={<ProtectedRoute isAllowed={user && user.role == 'admin'}><NotificationsAdmin/></ProtectedRoute>}/>
             <Route path="/*" element={<h1 style={{textAlign: 'center'}}>Not Found! This page does not exist!</h1>}/>
           </Routes>
       </main>

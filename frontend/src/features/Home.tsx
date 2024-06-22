@@ -4,6 +4,7 @@ import Tours from "./tours/Tours";
 import background from "../assets/images/main-bg.png";
 import {styled} from "@mui/system";
 import {useNavigate} from "react-router-dom";
+import FeedbackForm from "./notifications/components/FeedbackForm";
 
 const CustomButton = styled(Button)({
   backgroundColor: '#FF6F61',
@@ -61,6 +62,7 @@ const Home = () => {
       <Container>
         <Destinations/>
         <Tours/>
+        <FeedbackForm/>
       </Container>
     </>
   )

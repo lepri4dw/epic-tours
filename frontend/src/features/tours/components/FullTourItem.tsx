@@ -80,7 +80,7 @@ const FullTourItem = () => {
     <Container>
       {loading ? <CircularProgress/> : tour && (
         <Grid mt={3} container spacing={3} direction="column">
-          {user && user.role === 'admin' && <Grid item container sx={{ margin: '0 auto 16px'}} alignItems="center">
+          {user && user.role === 'admin' && <Grid item container sx={{ margin: '0 auto 16px'}} justifyContent="center">
             <Grid item sx={{ ml: 1 }}>
               <LoadingButton
                 color="error"
@@ -126,7 +126,7 @@ const FullTourItem = () => {
                 <Typography variant="h6" sx={{margin: '15px 0'}}><b>Price: ${tour.price}</b></Typography>
                 <Typography variant="h6"><b>Duration: {tour.duration} days
                   and {tour.duration - 1} nights</b></Typography>
-                <Typography sx={{marginTop: '15px'}}>{tour.description}</Typography>
+                <Typography sx={{marginTop: '15px', whiteSpace: 'normal', wordWrap: 'break-word'}}>{tour.description}</Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -159,7 +159,7 @@ const FullTourItem = () => {
                         </TableHead>
                         <TableBody>
                           <TableCell component="th" scope="row"></TableCell>
-                          <TableCell>{item.description}</TableCell>
+                          <TableCell sx={{whiteSpace: 'normal', wordWrap: 'break-word'}}>{item.description}</TableCell>
                         </TableBody>
                       </Table>
                     </StyledTableRow>
