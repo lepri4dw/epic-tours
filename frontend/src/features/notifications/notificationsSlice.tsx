@@ -55,10 +55,10 @@ export const notificationsSlice = createSlice({
     builder.addCase(notificationToggleChecked.fulfilled, (state) => {
       state.togglingIsChecked = false;
     });
-
     builder.addCase(notificationToggleChecked.rejected, (state) => {
       state.togglingIsChecked = false;
     });
+
     builder.addCase(fetchUncheckedCount.fulfilled, (state, { payload }) => {
       state.unchecked = payload;
     });
@@ -69,7 +69,6 @@ export const notificationsSlice = createSlice({
     builder.addCase(createNotification.fulfilled, (state) => {
       state.createLoading = false;
     });
-
     builder.addCase(
       createNotification.rejected,
       (state, { payload: error }) => {

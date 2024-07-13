@@ -80,8 +80,8 @@ const FullTourItem = () => {
     <Container>
       {loading ? <CircularProgress/> : tour && (
         <Grid mt={3} container spacing={3} direction="column">
-          {user && user.role === 'admin' && <Grid item container sx={{ margin: '0 auto 16px'}} justifyContent="center">
-            <Grid item sx={{ ml: 1 }}>
+          {user && user.role === 'admin' && <Grid item container sx={{margin: '0 auto 16px'}} justifyContent="center">
+            <Grid item sx={{ml: 1}}>
               <LoadingButton
                 color="error"
                 variant="contained"
@@ -93,7 +93,7 @@ const FullTourItem = () => {
                 <span>Удалить</span>
               </LoadingButton>
             </Grid>
-            <Grid item sx={{ ml: 1 }}>
+            <Grid item sx={{ml: 1}}>
               <Button
                 variant="contained"
                 color="primary"
@@ -107,44 +107,45 @@ const FullTourItem = () => {
           <Grid item xs={12}>
             <Typography variant="h3" align="center">{tour.title}</Typography>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12}>
             <Carousel animation="slide" autoPlay={false}>
               {tour.images.map(image => (
-                <Box sx={{display: 'flex'}} key={image}>
+                <Box  sx={{display: 'flex', width: {xs: '100%', sm: '90%', lg: '70%'}, height: {xs: '250px', sm: '350px', md: '500px' }, objectFit: 'cover', cursor: 'pointer', margin: '0 auto'}} key={image}>
                   <img src={apiURL + '/' + image} alt={tour.title}
-                       style={{width: '70%', height: '500px', objectFit: 'cover', cursor: 'pointer', margin: '0 auto'}}
-                       onClick={() => handleOpen(image)}/>
+                       style={{width: '100%', height: '100%'}} onClick={() => handleOpen(image)}/>
                 </Box>
               ))}
             </Carousel>
           </Grid>
           <Grid item xs={12}>
-            <Card sx={{maxWidth: '70%', margin: '0 auto', marginTop: '30px'}}>
+            <Card sx={{maxWidth: {xs: '100%', sm: '90%', lg: '70%'}, margin: '0 auto', marginTop: '30px'}}>
               <CardContent>
                 <Typography variant="h4" sx={{borderBottom: '2px #000 solid', paddingBottom: '10px'}}>Tour
                   Details</Typography>
                 <Typography variant="h6" sx={{margin: '15px 0'}}><b>Price: ${tour.price}</b></Typography>
                 <Typography variant="h6"><b>Duration: {tour.duration} days
                   and {tour.duration - 1} nights</b></Typography>
-                <Typography sx={{marginTop: '15px', whiteSpace: 'normal', wordWrap: 'break-word'}}>{tour.description}</Typography>
+                <Typography
+                  sx={{marginTop: '15px', whiteSpace: 'normal', wordWrap: 'break-word'}}>{tour.description}</Typography>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card sx={{maxWidth: '70%', margin: '0 auto', marginTop: '30px'}}>
+            <Card sx={{maxWidth: {xs: '100%', sm: '90%', lg: '70%'}, margin: '0 auto', marginTop: '30px'}}>
               <CardContent>
                 <Typography variant="h4" sx={{borderBottom: '2px #000 solid', paddingBottom: '10px'}}>Route</Typography>
                 {tour.places &&
                   <Typography variant="h6" sx={{margin: '15px 0'}}><b>Places to visit: </b>{tour.places}</Typography>}
                 <Box sx={{display: 'flex'}}>
                   {tour.route && <img src={apiURL + '/' + tour.route} alt="Маршрут тура"
-                                      style={{margin: '20px auto 0', }} onClick={() => handleOpen(tour.route || '')} className="clickableImage"/>}
+                                      style={{margin: '20px auto 0',}} onClick={() => handleOpen(tour.route || '')}
+                                      className="clickableImage"/>}
                 </Box>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card sx={{maxWidth: '70%', margin: '0 auto', marginTop: '30px'}}>
+            <Card sx={{maxWidth: {xs: '100%', sm: '90%', lg: '70%'}, margin: '0 auto', marginTop: '30px'}}>
               <CardContent>
                 <Typography variant="h4" sx={{borderBottom: '2px #000 solid', paddingBottom: '10px'}}>
                   Tour Summary
@@ -164,7 +165,7 @@ const FullTourItem = () => {
                       </Table>
                     </StyledTableRow>
                   </TableContainer>
-                  ))}
+                ))}
               </CardContent>
             </Card>
           </Grid>

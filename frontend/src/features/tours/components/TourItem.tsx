@@ -55,7 +55,7 @@ const PriceTag = styled(Box)({
 
 const InfoBox = styled(Box)({
   position: 'absolute',
-  top: '185px',
+  top: '-18px',
   right: '16px',
   left: '16px',
   backgroundColor: '#0190BE',
@@ -122,7 +122,7 @@ const TourItem: React.FC<Props> = ({tour,}) => {
           )}
           <ImageCardMedia title={tour.title} image={`${apiURL}/${tour.images[0]}`}/>
           <PriceTag>${tour.price} / <span style={{fontSize: '14px'}}>per person</span></PriceTag>
-          <CardContent>
+          <CardContent style={{position: 'relative'}}>
             <Typography gutterBottom variant="h5" component="div" sx={{marginTop: '16px'}}>
               {tour.title}
             </Typography>

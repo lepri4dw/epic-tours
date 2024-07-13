@@ -48,11 +48,11 @@ const Home = () => {
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: '1rem', sm: '3rem', md: '4rem', lg: '5rem', xl: '5rem' },
+              fontSize: { xs: '2rem', sm: '3rem', md: '4rem', lg: '5rem', xl: '5rem' },
               mb: 2,
             }}
           >
-            Epic Tours your reliable partner <p style={{fontSize: '3rem', margin: '0'}}>to provide you with exceptional service each and every time!</p>
+            Epic Tours your reliable partner <Typography sx={{fontSize: { xs: '20px', sm: '2rem', md: '2rem', lg: '2rem', xl: '3rem' } , margin: '0'}}>to provide you with exceptional service each and every time!</Typography>
           </Typography>
           <CustomButton variant="contained" size="large" onClick={() => navigate('/tours')}>
             View Tours

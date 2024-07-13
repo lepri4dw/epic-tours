@@ -6,7 +6,7 @@ import {
   ImageList,
   ImageListItem,
   ImageListItemBar,
-  Typography
+  Typography, useMediaQuery, useTheme
 } from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import {deleteDestination, fetchDestinations} from "./destinationsThunks";
@@ -44,6 +44,24 @@ const Destinations: React.FC = () => {
     dispatch(fetchDestinations());
   }, [dispatch]);
 
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+  const isMd = useMediaQuery(theme.breakpoints.only('md'));
+  const isLg = useMediaQuery(theme.breakpoints.up('lg'));
+
+  let cols = 1;
+  if (isXs) cols = 1;
+  else if (isSm || isMd) cols = 2;
+  else if (isLg) cols = 3;
+
+  let gap;
+  if (isXs) gap = 10;
+  else if (isSm) gap = 15;
+  else if (isMd) gap = 20;
+  else if (isLg) gap = 25;
+
+
   return (
     <Box sx={{width: '100%', height: '100%', padding: 2}}>
       <Grid container spacing={2} justifyContent="center">
@@ -67,7 +85,18 @@ const Destinations: React.FC = () => {
         <Box display="flex" justifyContent="center" alignItems="center">
           <CircularProgress/>
         </Box> :
-        <ImageList sx={{margin: '0 auto', padding: '10px 30px'}} variant="quilted" cols={3} rowHeight={315} gap={30}>
+        <ImageList
+          sx={{
+            margin: '0 auto',
+            padding: {xs: '10px 0px', sm: '10px 0px', lg: '10px 20px', xl: '10px 30px'},
+            width: '100%',
+
+          }}
+          cols={cols}
+          variant="quilted"
+          rowHeight={315}
+          gap={gap}
+        >
           {destinations.map((destination) => (
             <ImageListItem
               key={destination._id}
@@ -83,25 +112,25 @@ const Destinations: React.FC = () => {
                   background: 'rgba(0, 0, 0, 0.5)',
                 },
               }}
-              cols={destination.cols || 1}
-              rows={destination.rows || 1}
+              cols={cols !== 1 ? destination.cols || 1 : 1}
+              rows={cols !== 1 ? destination.rows || 1 : 1}
               onClick={() => navigate('/')}
             >
               {user && user.role === 'admin' && (
-                <Grid container spacing={2} style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 10 }}>
+                <Grid container spacing={2} style={{position: 'absolute', top: '10px', left: '10px', zIndex: 10}}>
                   <Grid item>
                     <IconButton
                       disabled={deleteLoading ? deleteLoading === destination._id : false}
                       onClick={(event) => handleDelete(event, destination._id)}
                     >
-                      <DeleteIcon sx={{ color: '#fff' }} />
+                      <DeleteIcon sx={{color: '#fff'}}/>
                     </IconButton>
                   </Grid>
                   <Grid item>
                     <IconButton
                       onClick={(event) => handleEdit(event, destination._id)}
                     >
-                      <EditIcon sx={{ color: '#fff' }} />
+                      <EditIcon sx={{color: '#fff'}}/>
                     </IconButton>
                   </Grid>
                 </Grid>
@@ -122,11 +151,11 @@ const Destinations: React.FC = () => {
                   background: 'inherit',
                   textAlign: 'right',
                   '& .MuiImageListItemBar-title': {
-                    fontSize: '2.5rem',
+                    fontSize: {xs: '26px', lg: '40px'},
                     padding: '15px 0',
                   },
                   '& .MuiImageListItemBar-subtitle': {
-                    fontSize: '1.5rem',
+                    fontSize: {xs: '16px', lg: '24px'},
                   },
                 }}
               />

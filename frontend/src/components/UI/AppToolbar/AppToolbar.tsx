@@ -157,22 +157,6 @@ const AppToolbar = () => {
                   <Grid item>
                     <Link
                       component={NavLink}
-                      to="/blog"
-                      style={{
-                        textDecoration: 'none',
-                        color: 'inherit',
-                        fontWeight: location.pathname === '/blog' ? 'bold' : 'normal',
-                      }}
-                      sx={{
-                        '&:hover': {textDecoration: 'underline'},
-                      }}
-                    >
-                      BLOG
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link
-                      component={NavLink}
                       to="#contacts"
                       style={{
                         textDecoration: 'none',
