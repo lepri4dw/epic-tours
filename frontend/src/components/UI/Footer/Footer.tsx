@@ -83,11 +83,11 @@ const Footer = () => {
                 <Grid item>
                   <Link
                     component={NavLink}
-                    to="#contacts"
+                    to="/contact"
                     style={{
                       textDecoration: 'none',
                       color: 'inherit',
-                      fontWeight: location.pathname === '#contacts' ? 'bold' : 'normal',
+                      fontWeight: location.pathname === '/contact' ? 'bold' : 'normal',
                     }}
                     sx={{
                       '&:hover': {textDecoration: 'underline'},
