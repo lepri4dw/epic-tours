@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-  Alert,
+  Alert, Box,
   Button,
   Grid,
   Snackbar,
   TextField,
   Typography,
 } from '@mui/material';
-import { borderRadius } from '../../../styles';
-import { INotification } from '../../../types';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { createNotification } from '../notificationsThunks';
+import {borderRadius} from '../../../styles';
+import {INotification} from '../../../types';
+import {useAppDispatch, useAppSelector} from '../../../app/hooks';
+import {createNotification} from '../notificationsThunks';
 import {
   selectCreateNotificationError,
   selectNotificationCreating,
 } from '../notificationsSlice';
+import {AccessTime, LocationOn, Phone} from "@mui/icons-material";
+import EmailIcon from "@mui/icons-material/Email";
 
 const inputStyle = {
   background: '#fff',
@@ -54,15 +56,19 @@ const FeedbackForm = () => {
   const inputChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     setState((prevState) => {
-      return { ...prevState, [name]: value };
+      return {...prevState, [name]: value};
     });
   };
 
   const isValidPhone = (phone: string) => {
-    const phoneRegex = /^(\+996)?\d{9}$/;
-    return phoneRegex.test(phone);
+    if (phone) {
+      const phoneRegex = /^(\+996)?\d{9}$/;
+      return phoneRegex.test(phone);
+    } else {
+      return true;
+    }
   };
 
   const onFormSubmit = async (e: React.FormEvent) => {
@@ -101,36 +107,91 @@ const FeedbackForm = () => {
   return (
     <Grid
       container
-      style={{ background: '#c7efcf', borderRadius, padding: '20px' }}
+      style={{background: '#c7efcf', borderRadius, padding: '20px'}}
       direction="row"
-      alignItems="center"
-      id="contacts"
+      spacing={5}
     >
-      <Grid item lg style={{fontWeight: 600, textTransform: 'uppercase', lineHeight: '1.6'}}>
-        <Typography
-          variant="h4"
-          color="#010502"
-          style={{ marginRight: '20px', fontWeight: '700', marginLeft: '4%' }}
-          width={{ sm: '70vw', md: '45vw' }}
-          paddingBottom={{ xs: '35px', md: 0 }}
-          fontSize={{ xs: '20px', sm: '35px', lg: '50px' }}
-        >
-          Book a tour or get information{' '}
-        </Typography>
+      <Grid item md={6}>
+        <Typography variant="h4" sx={{mb: 2}}>CONTACT INFORMATION</Typography>
+        <Box display="flex" alignItems="center" sx={{mb: 2, borderBottom: '3px solid #ddd', pb: 1}}>
+        <span style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '40px',
+          height: '40px',
+          background: '#FF6F61',
+          borderRadius: '50%',
+          marginRight: '20px'
+        }}>
+        <Phone sx={{margin: 'auto', color: '#fff'}}/>
+        </span>
+          <Box display="flex" justifyContent="space-between" width="100%">
+            <Typography><b>PHONE NUMBER: </b></Typography>
+            <Typography sx={{ml: 1}}>+996558775388 (WhatsApp)</Typography>
+          </Box>
+        </Box>
+
+        <Box display="flex" alignItems="center" sx={{mb: 2, borderBottom: '3px solid #ddd', pb: 1}}>
+        <span style={{
+          display: 'flex',
+          width: '40px',
+          height: '40px',
+          background: '#FF6F61',
+          borderRadius: '50%',
+          marginRight: '20px'
+        }}>
+        <LocationOn sx={{margin: 'auto', color: '#fff'}}/>
+        </span>
+          <Box display="flex" justifyContent="space-between" width="100%">
+            <Typography><b>ADDRESS: </b></Typography>
+            <Typography sx={{ml: 1}}>720024, Kyrgyzstan, Bishkek, Frunze St., Tula №14</Typography>
+          </Box>
+        </Box>
+
+        <Box display="flex" alignItems="center" sx={{mb: 2, borderBottom: '3px solid #ddd', pb: 1}}>
+        <span style={{
+          display: 'flex',
+          width: '40px',
+          height: '40px',
+          background: '#FF6F61',
+          borderRadius: '50%',
+          marginRight: '20px'
+        }}>
+        <EmailIcon sx={{margin: 'auto', color: '#fff'}}/>
+        </span>
+          <Box display="flex" justifyContent="space-between" width="100%">
+            <Typography><b>EMAIL: </b></Typography>
+            <Typography sx={{ml: 1}}>epictkg@bk.ru | turahunovzak@gmail.com</Typography>
+          </Box>
+        </Box>
+
+        <Box display="flex" alignItems="center" sx={{mb: 2, borderBottom: '3px solid #ddd', pb: 1}}>
+        <span style={{
+          display: 'flex',
+          width: '40px',
+          height: '40px',
+          background: '#FF6F61',
+          borderRadius: '50%',
+          marginRight: '20px'
+        }}>
+        <AccessTime sx={{margin: 'auto', color: '#fff'}}/>
+        </span>
+          <Box display="flex" justifyContent="space-between" width="100%">
+            <Typography><b>WORKING HOURS: </b></Typography>
+            <Typography sx={{ml: 1}}>Mon - Sat 9.00 - 19.00. Sunday CLOSED</Typography>
+          </Box>
+        </Box>
       </Grid>
-      <Grid
-        item
-        md
-        width={{ xs: '70vw', sm: '80vw', md: '45vw' }}
-        sx={{ ml: 1 }}
-      >
+      <Grid item md={6}>
+        <Typography variant="h4" sx={{mb: 2}}>HAVE A QUESTION?</Typography>
         <form onSubmit={onFormSubmit}>
           <Grid container direction="column" spacing={2}>
             <Grid item xs>
               <TextField
                 id="name"
                 name="name"
-                label="Ваше имя"
+                label="Your name"
                 value={state.name}
                 onChange={inputChangeHandler}
                 required
@@ -145,7 +206,7 @@ const FeedbackForm = () => {
                 type="email"
                 id="email"
                 name="email"
-                label="Электронная почта"
+                label="Email"
                 value={state.email}
                 onChange={inputChangeHandler}
                 required
@@ -160,17 +221,16 @@ const FeedbackForm = () => {
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
-                label="Телефон +996 ХХХ ХХХ ХХХ"
+                label="Phone Number (KG Only) +996 ХХХ ХХХ ХХХ"
                 value={state.phoneNumber}
                 onChange={inputChangeHandler}
-                required
                 disabled={notificationCreating}
                 error={
                   Boolean(getFieldError('phoneNumber')) || Boolean(phoneError)
                 }
                 helperText={getFieldError('phoneNumber') || phoneError}
                 style={inputStyle}
-                inputProps={{ pattern: phoneNumberPattern }}
+                inputProps={{pattern: phoneNumberPattern}}
               />
             </Grid>
             <Grid item xs>
@@ -179,7 +239,7 @@ const FeedbackForm = () => {
                 rows={2}
                 id="message"
                 name="message"
-                label="Сообщение"
+                label="Message"
                 value={state.message}
                 onChange={inputChangeHandler}
                 disabled={notificationCreating}
@@ -199,7 +259,7 @@ const FeedbackForm = () => {
         </form>
       </Grid>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity="success" sx={{width: '100%'}}>
           Data sent successfully. The operator will contact you shortly
         </Alert>
       </Snackbar>

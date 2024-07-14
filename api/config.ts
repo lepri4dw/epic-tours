@@ -7,7 +7,7 @@ const config = {
   publicPath: path.join(rootPath, 'public'),
   db: 'mongodb://localhost/tours',
   emailData: {
-    emailVerifyPass: 'nznipjhbbzooezuk',
+    emailVerifyPass: 'nafejjmqgnopmpdd',
     emailUser: 'epictourskg@gmail.com',
   },
 };

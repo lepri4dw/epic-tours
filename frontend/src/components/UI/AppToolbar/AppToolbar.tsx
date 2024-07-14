@@ -55,7 +55,7 @@ const AppToolbar = () => {
 
   return (
     <>
-      <Box sx={{bgcolor: 'fff', py: 1, display: {xs: 'none', lg: 'block'}, mb: 2}}>
+      <Box sx={{bgcolor: 'fff', py: 1, display: {xs: 'none', md: 'block'}, mb: 2}}>
         <Container>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
@@ -119,7 +119,7 @@ const AppToolbar = () => {
                         '&:hover': {textDecoration: 'underline'},
                       }}
                     >
-                      ABOUT
+                      ABOUT US
                     </Link>
                   </Grid>
                   <Grid item>
@@ -141,27 +141,11 @@ const AppToolbar = () => {
                   <Grid item>
                     <Link
                       component={NavLink}
-                      to="/pages"
+                      to="/contact"
                       style={{
                         textDecoration: 'none',
                         color: 'inherit',
-                        fontWeight: location.pathname === '/pages' ? 'bold' : 'normal',
-                      }}
-                      sx={{
-                        '&:hover': {textDecoration: 'underline'},
-                      }}
-                    >
-                      PAGES
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link
-                      component={NavLink}
-                      to="#contacts"
-                      style={{
-                        textDecoration: 'none',
-                        color: 'inherit',
-                        fontWeight: location.pathname === '#contacts' ? 'bold' : 'normal',
+                        fontWeight: location.pathname === '/contact' ? 'bold' : 'normal',
                       }}
                       sx={{
                         '&:hover': {textDecoration: 'underline'},

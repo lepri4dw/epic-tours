@@ -17,6 +17,22 @@ toursRouter.get('/', async (req, res, next) => {
   }
 });
 
+toursRouter.get('/images', async (req, res, next) => {
+  try {
+    const tours = await Tour.find();
+    const images = tours.flatMap(tour => {
+      return tour.images.map(image => ({
+        title: tour.title,
+        image
+      }));
+    });
+    console.log(images);
+    return res.send(images);
+  } catch (e) {
+    return next(e);
+  }
+});
+
 toursRouter.get('/:id', async (req, res, next) => {
   try {
     const tour = await Tour.findById(req.params.id).populate('destinations');

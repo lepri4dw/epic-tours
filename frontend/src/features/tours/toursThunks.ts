@@ -1,12 +1,20 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axiosApi from "../../axiosApi";
-import {Tour, TourMutation, ValidationError} from "../../types";
+import {ITourImage, Tour, TourMutation, ValidationError} from "../../types";
 import {isAxiosError} from "axios";
 
 export const fetchTours = createAsyncThunk(
   'tours/fetchAll',
   async () => {
     const response = await axiosApi.get<Tour[]>('/tours');
+    return response.data;
+  }
+);
+
+export const fetchToursImages = createAsyncThunk(
+  'tours/fetchAllImages',
+  async () => {
+    const response = await axiosApi.get<ITourImage[]>('/tours/images');
     return response.data;
   }
 );

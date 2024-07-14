@@ -109,3 +109,8 @@ export interface INotification {
   phoneNumber: string;
   message: string | null;
 }
+
+export interface ITourImage {
+  title: string;
+  image: string;
+}

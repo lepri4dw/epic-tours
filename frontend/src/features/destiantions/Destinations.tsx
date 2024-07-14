@@ -63,7 +63,7 @@ const Destinations: React.FC = () => {
 
 
   return (
-    <Box sx={{width: '100%', height: '100%', padding: 2}}>
+    <Box sx={{width: '100%', height: '100%', padding: 2, mt: 5}}>
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
           <Typography variant="h4" gutterBottom style={{textAlign: 'center'}} className="section-title">

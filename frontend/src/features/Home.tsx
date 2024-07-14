@@ -1,10 +1,11 @@
-import {Box, Button, Container, Typography} from "@mui/material";
+import {Box, Button, Container, Grid, Typography, useMediaQuery} from "@mui/material";
 import Destinations from "./destiantions/Destinations";
 import Tours from "./tours/Tours";
 import background from "../assets/images/main-bg.png";
 import {styled} from "@mui/system";
 import {useNavigate} from "react-router-dom";
-import FeedbackForm from "./notifications/components/FeedbackForm";
+import React from "react";
+import Partners from "../components/UI/Partners";
 
 const CustomButton = styled(Button)({
   backgroundColor: '#FF6F61',
@@ -60,9 +61,10 @@ const Home = () => {
         </Container>
       </Box>
       <Container>
+        <Partners/>
         <Destinations/>
         <Tours/>
-        <FeedbackForm/>
+        {/*<FeedbackForm/>*/}
       </Container>
     </>
   )

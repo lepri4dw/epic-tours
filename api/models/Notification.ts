@@ -13,7 +13,6 @@ const NotificationSchema = new Schema({
   },
   phoneNumber: {
     type: String,
-    required: true,
     validate: {
       validator: function (phoneNumber: string): boolean {
         if (!phoneNumber) {

@@ -1,11 +1,12 @@
-import {Tour, ValidationError} from "../../types";
+import {ITourImage, Tour, ValidationError} from "../../types";
 import {createSlice} from "@reduxjs/toolkit";
-import {createTour, deleteTour, fetchOneTour, fetchTours, updateTour} from "./toursThunks";
+import {createTour, deleteTour, fetchOneTour, fetchTours, fetchToursImages, updateTour} from "./toursThunks";
 import {RootState} from "../../app/store";
 
 interface ToursState {
   items: Tour[],
   oneTour: Tour | null,
+  toursImages: ITourImage[],
   fetchOneLoading: boolean,
   fetchLoading: boolean;
   submitting: boolean;
@@ -16,6 +17,7 @@ interface ToursState {
 const initialState: ToursState = {
   items: [],
   oneTour: null,
+  toursImages: [],
   fetchOneLoading: false,
   fetchLoading: false,
   submitting: false,
@@ -37,6 +39,17 @@ const toursSlice = createSlice({
         state.items = tours;
       })
       .addCase(fetchTours.rejected, (state) => {
+        state.fetchLoading = false;
+      })
+
+      .addCase(fetchToursImages.pending, (state) => {
+        state.fetchLoading = true;
+      })
+      .addCase(fetchToursImages.fulfilled, (state, {payload: images}) => {
+        state.fetchLoading = false;
+        state.toursImages = images;
+      })
+      .addCase(fetchToursImages.rejected, (state) => {
         state.fetchLoading = false;
       })
 
@@ -92,6 +105,7 @@ export const toursReducer = toursSlice.reducer;
 
 export const selectTours = (state: RootState) => state.tours.items;
 export const selectToursFetching = (state: RootState) => state.tours.fetchLoading;
+export const selectToursImages = (state: RootState) => state.tours.toursImages;
 export const selectOneTour = (state: RootState) => state.tours.oneTour;
 export const selectOneTourFetching = (state: RootState) => state.tours.fetchOneLoading;
 export const selectTourSubmitting = (state: RootState) => state.tours.submitting;
