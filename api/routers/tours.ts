@@ -26,7 +26,6 @@ toursRouter.get('/images', async (req, res, next) => {
         image
       }));
     });
-    console.log(images);
     return res.send(images);
   } catch (e) {
     return next(e);
@@ -52,7 +51,6 @@ toursRouter.post('/', auth, permit('admin'), imagesUpload.array('images', 50), a
     const images = files.map(file => file.filename);
     const destinations = JSON.parse(req.body.destinations);
     const schedule = JSON.parse(req.body.schedule);
-
 
     const tour = await Tour.create({
       title: req.body.title,
