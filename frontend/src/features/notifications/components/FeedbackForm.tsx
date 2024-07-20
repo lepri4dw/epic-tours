@@ -91,9 +91,8 @@ const FeedbackForm = () => {
       container
       style={{background: '#c7efcf', borderRadius, padding: '20px'}}
       direction="row"
-      spacing={5}
     >
-      <Grid item md={6}>
+      <Grid item xs={12} md={6} sx={{pr: 3}}>
         <Typography variant="h4" sx={{mb: 2}}>CONTACT INFORMATION</Typography>
         <Box display="flex" alignItems="center" sx={{mb: 2, borderBottom: '3px solid #ddd', pb: 1}}>
         <span style={{
@@ -104,7 +103,7 @@ const FeedbackForm = () => {
           height: '40px',
           background: '#FF6F61',
           borderRadius: '50%',
-          marginRight: '20px'
+          marginRight: '10px'
         }}>
         <Phone sx={{margin: 'auto', color: '#fff'}}/>
         </span>
@@ -121,7 +120,7 @@ const FeedbackForm = () => {
           height: '40px',
           background: '#FF6F61',
           borderRadius: '50%',
-          marginRight: '20px'
+          marginRight: '10px'
         }}>
         <LocationOn sx={{margin: 'auto', color: '#fff'}}/>
         </span>
@@ -138,7 +137,7 @@ const FeedbackForm = () => {
           height: '40px',
           background: '#FF6F61',
           borderRadius: '50%',
-          marginRight: '20px'
+          marginRight: '10px'
         }}>
         <EmailIcon sx={{margin: 'auto', color: '#fff'}}/>
         </span>
@@ -155,7 +154,7 @@ const FeedbackForm = () => {
           height: '40px',
           background: '#FF6F61',
           borderRadius: '50%',
-          marginRight: '20px'
+          marginRight: '10px'
         }}>
         <AccessTime sx={{margin: 'auto', color: '#fff'}}/>
         </span>
@@ -165,7 +164,7 @@ const FeedbackForm = () => {
           </Box>
         </Box>
       </Grid>
-      <Grid item md={6}>
+      <Grid item xs={12} md={6}>
         <Typography variant="h4" sx={{mb: 2}}>HAVE A QUESTION?</Typography>
         <form onSubmit={onFormSubmit}>
           <Grid container direction="column" spacing={2}>

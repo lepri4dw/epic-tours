@@ -31,66 +31,54 @@ const Footer = () => {
             <Grid item xs={12} sm={6}>
               <Typography sx={{fontWeight: 'bold', paddingLeft: '8px', borderLeft: 'solid 3px #00A1EB', mb: 3}}>OUR
                 MENU</Typography>
-              <Grid container spacing={2} flexDirection="column" sx={{ml: 1}}>
+              <Grid container flexDirection="column" sx={{ml: 1}}>
                 <Grid item>
                   <Link
                     component={NavLink}
                     to="/"
-                    style={{
+                    sx={{
                       textDecoration: 'none',
                       color: 'inherit',
                       fontWeight: location.pathname === '/' ? 'bold' : 'normal',
-                    }}
-                    sx={{
-                      '&:hover': {textDecoration: 'underline'},
                     }}
                   >
                     <span style={{marginRight: '16px', color: '#FF6F61', fontSize: '14px'}}>&#62;</span>  HOME
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item sx={{mt: 2}}>
                   <Link
                     component={NavLink}
                     to="/about"
-                    style={{
+                    sx={{
                       textDecoration: 'none',
                       color: 'inherit',
                       fontWeight: location.pathname === '/about' ? 'bold' : 'normal',
-                    }}
-                    sx={{
-                      '&:hover': {textDecoration: 'underline'},
                     }}
                   >
                     <span style={{marginRight: '16px', color: '#FF6F61', fontSize: '14px'}}>&#62;</span> ABOUT US
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item sx={{mt: 2}}>
                   <Link
                     component={NavLink}
                     to="/tours"
-                    style={{
+                    sx={{
                       textDecoration: 'none',
                       color: 'inherit',
                       fontWeight: location.pathname === '/tours' ? 'bold' : 'normal',
-                    }}
-                    sx={{
-                      '&:hover': {textDecoration: 'underline'},
                     }}
                   >
                     <span style={{marginRight: '16px', color: '#FF6F61', fontSize: '14px'}}>&#62;</span> TOURS
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item sx={{mt: 2}}>
                   <Link
                     component={NavLink}
                     to="/contact"
-                    style={{
+                    sx={{
                       textDecoration: 'none',
                       color: 'inherit',
                       fontWeight: location.pathname === '/contact' ? 'bold' : 'normal',
-                    }}
-                    sx={{
-                      '&:hover': {textDecoration: 'underline'},
                     }}
                   >
                     <span style={{marginRight: '16px', color: '#FF6F61', fontSize: '14px'}}>&#62;</span> CONTACT

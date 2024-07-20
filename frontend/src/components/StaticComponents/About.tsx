@@ -30,6 +30,7 @@ const About = () => {
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [selectedTitle, setSelectedTitle] = useState<string>('');
   const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const isMd = useMediaQuery(theme.breakpoints.up('md'));
   const handleOpen = (image: string, title?: string) => {
     setSelectedImage(image);
     setSelectedTitle(title || '');
@@ -55,7 +56,7 @@ const About = () => {
           </Container>
         </Box>
         <Container>
-          <Grid container sx={{margin: '50px 0'}} spacing={2}>
+          <Grid container sx={{margin: '50px 0'}} spacing={isMd ? 2 : 0}>
             <Grid item xs={12} md={5} sx={{textAlign: 'center', marginTop: '20px'}}>
               <Typography variant="h5" sx={{fontWeight: 'bold', mb: '20px'}}>About us</Typography>
               <Typography sx={{fontSize: '18px'}}>Created in 2016, Epic Tours is a full-service Travel Company based in the heart of Central Asia/
@@ -77,7 +78,7 @@ const About = () => {
               </ImageList>
             </Grid>
           </Grid>
-          <Grid container sx={{margin: '80px 0'}} spacing={2}>
+          <Grid container sx={{margin: '80px 0'}} spacing={isMd ? 2 : 0}>
             <Grid item xs={12} md={6}>
               <Carousel autoPlay={false} sx={{height: '100%'}}>
                 {imageChunks.map((chunk, index) => (
@@ -101,7 +102,6 @@ const About = () => {
               <Typography sx={{fontSize: '18px'}}>Epic Tours organizes trips to Kyrgyzstan, Uzbekistan, Turkmenistan, Tajikistan and Kazakhstan. Epic Tours aims at setting up of interesting and unforgettable itineraries with a great attention to details and makes it convenient for you to enjoy welcoming Central Asia. Moreover, Epic Tours will immerse you in a culture that is far different than your own. On our trips all of your needs will be taken care of so you can fully be in the moment and capture exhibition quality images. Our unique destinations, well researched itineraries and excellent/professional team are what set us apart. We lodge in hotels that have ambiance and a true sense of place. If you are passionate about Photography/History of Silk Road and Adventure Travel you will love being part of an Epic Tours expedition. Our itineraries are cutting edge and all have been vetted before you get there. Just bring your camera and a sense of curiosity. Traveling with Epic Tours, you will get top service at a reasonable price.</Typography>
             </Grid>
           </Grid>
-
         </Container>
       </Box>
       <ImageModal open={open} handleClose={handleClose} title={selectedTitle} image={selectedImage} hasTitle/>
