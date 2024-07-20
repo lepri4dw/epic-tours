@@ -5,12 +5,19 @@ import permit from '../middleware/permit';
 import {imagesUpload, UploadedFile} from "../multer";
 import Tour from '../models/Tour';
 import fs from 'fs/promises';
+import destinations from "./ destinations";
 
 const toursRouter = express.Router();
 
 toursRouter.get('/', async (req, res, next) => {
   try {
-    const tours = await Tour.find().populate('destinations');
+    const {destination} = req.query;
+    let query = {};
+    if (destination) {
+      query = {destinations: destination}
+    }
+
+    let tours = await Tour.find(query).populate('destinations');
     return res.send(tours);
   } catch (e) {
     return next(e);

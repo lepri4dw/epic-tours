@@ -64,7 +64,9 @@ const Tours = () => {
         </Box> :
         <Grid container spacing={3}>
           {tours.slice(0, 3).map(tour => (
-            <TourItem key={tour._id} tour={tour} />
+            <Grid item xs={12} sm={6} md={4}>
+              <TourItem key={tour._id} tour={tour} />
+            </Grid>
           ))}
         </Grid>
       }

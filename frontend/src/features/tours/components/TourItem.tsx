@@ -102,52 +102,50 @@ const TourItem: React.FC<Props> = ({tour,}) => {
 
 
   return (
-    <Grid item xs={12} sm={6} md={4}>
-      <CustomCard className="card" onClick={() => navigate(`/tours/${tour._id}`)}>
-        <CardActionArea>
-          {user && user.role === 'admin' && (
-            <Grid container spacing={2} style={{position: 'absolute', top: '10px', left: '10px', zIndex: 10}}>
-              <Grid item>
-                <IconButton disabled={deleteLoading ? deleteLoading === tour._id : false}
-                            onClick={handleDelete}>
-                  <DeleteIcon sx={{color: '#fff'}}/>
-                </IconButton>
-              </Grid>
-              <Grid item>
-                <IconButton onClick={handleEdit}>
-                  <EditIcon sx={{color: '#fff'}}/>
-                </IconButton>
-              </Grid>
+    <CustomCard className="card" onClick={() => navigate(`/tours/${tour._id}`)}>
+      <CardActionArea>
+        {user && user.role === 'admin' && (
+          <Grid container spacing={2} style={{position: 'absolute', top: '10px', left: '10px', zIndex: 10}}>
+            <Grid item>
+              <IconButton disabled={deleteLoading ? deleteLoading === tour._id : false}
+                          onClick={handleDelete}>
+                <DeleteIcon sx={{color: '#fff'}}/>
+              </IconButton>
             </Grid>
-          )}
-          <ImageCardMedia title={tour.title} image={`${apiURL}/${tour.images[0]}`}/>
-          <PriceTag>${tour.price} / <span style={{fontSize: '14px'}}>per person</span></PriceTag>
-          <CardContent style={{position: 'relative'}}>
-            <Typography gutterBottom variant="h5" component="div" sx={{marginTop: '16px'}}>
-              {tour.title}
-            </Typography>
-            <InfoBox>
-              <Box display="flex" alignItems="center" sx={{flexShrink: 0, marginRight: '10px'}}>
-                <AccessTime fontSize="small"/>
-                <Typography variant="body2" color="inherit" marginLeft={1}>
-                  {tour.duration}D/{tour.duration - 1}N
-                </Typography>
-              </Box>
-              <Box display="flex" alignItems="center" sx={{flex: '1 1 0', overflow: 'hidden'}}>
-                <LocationOn fontSize="small"/>
-                <Typography variant="body2" color="inherit" marginLeft={1}
-                            sx={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                  {tour.destinations.map(destination => destination.name).join(', ')}
-                </Typography>
-              </Box>
-            </InfoBox>
-            <Description variant="body2" color="text.secondary" marginTop={2}>
-              {tour.description}
-            </Description>
-          </CardContent>
-        </CardActionArea>
-      </CustomCard>
-    </Grid>
+            <Grid item>
+              <IconButton onClick={handleEdit}>
+                <EditIcon sx={{color: '#fff'}}/>
+              </IconButton>
+            </Grid>
+          </Grid>
+        )}
+        <ImageCardMedia title={tour.title} image={`${apiURL}/${tour.images[0]}`}/>
+        <PriceTag>${tour.price} / <span style={{fontSize: '14px'}}>per person</span></PriceTag>
+        <CardContent style={{position: 'relative'}}>
+          <Typography gutterBottom variant="h5" component="div" sx={{marginTop: '16px'}}>
+            {tour.title}
+          </Typography>
+          <InfoBox>
+            <Box display="flex" alignItems="center" sx={{flexShrink: 0, marginRight: '10px'}}>
+              <AccessTime fontSize="small"/>
+              <Typography variant="body2" color="inherit" marginLeft={1}>
+                {tour.duration}D/{tour.duration - 1}N
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center" sx={{flex: '1 1 0', overflow: 'hidden'}}>
+              <LocationOn fontSize="small"/>
+              <Typography variant="body2" color="inherit" marginLeft={1}
+                          sx={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                {tour.destinations.map(destination => destination.name).join(', ')}
+              </Typography>
+            </Box>
+          </InfoBox>
+          <Description variant="body2" color="text.secondary" marginTop={2}>
+            {tour.description}
+          </Description>
+        </CardContent>
+      </CardActionArea>
+    </CustomCard>
   );
 };
 

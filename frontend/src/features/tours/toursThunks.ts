@@ -3,10 +3,10 @@ import axiosApi from "../../axiosApi";
 import {ITourImage, Tour, TourMutation, ValidationError} from "../../types";
 import {isAxiosError} from "axios";
 
-export const fetchTours = createAsyncThunk(
+export const fetchTours = createAsyncThunk<Tour[], string | undefined>(
   'tours/fetchAll',
-  async () => {
-    const response = await axiosApi.get<Tour[]>('/tours');
+  async (destination) => {
+    const response = await axiosApi.get<Tour[]>(destination ? `/tours?destination=${destination}` : '/tours');
     return response.data;
   }
 );

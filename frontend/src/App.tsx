@@ -4,7 +4,7 @@ import {CssBaseline} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
 import Login from "./features/users/Login";
 import FullTourItem from "./features/tours/components/FullTourItem";
-import Home from "./features/Home";
+import Home from "./components/StaticComponents/Home";
 import NewDestination from "./features/destiantions/components/NewDestination";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import {useAppSelector} from "./app/hooks";
@@ -14,9 +14,9 @@ import EditTour from "./features/tours/components/EditTour";
 import EditDestination from "./features/destiantions/components/EditDestination";
 import ToursPage from "./features/tours/ToursPage";
 import NotificationsAdmin from "./features/notifications/NotificationsAdmin";
-import About from "./features/About";
+import About from "./components/StaticComponents/About";
 import Footer from "./components/UI/Footer/Footer";
-import Contact from "./features/Contact";
+import Contact from "./components/StaticComponents/Contact";
 
 function App() {
   const user = useAppSelector(selectUser);

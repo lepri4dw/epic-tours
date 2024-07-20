@@ -30,9 +30,9 @@ import { logout } from '../../../features/users/usersThunks';
 const AppToolbar = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
-  const navigate = useNavigate();
   const user = useAppSelector(selectUser);
   const uncheckedCount = useAppSelector(selectUnchecked);
   const [drawerOpen, setDrawerOpen] = React.useState(false);

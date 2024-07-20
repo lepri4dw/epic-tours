@@ -8,7 +8,7 @@ import {
   ImageListItemBar,
   Typography, useMediaQuery, useTheme
 } from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import {deleteDestination, fetchDestinations} from "./destinationsThunks";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {apiURL} from "../../constants";
@@ -114,7 +114,7 @@ const Destinations: React.FC = () => {
               }}
               cols={cols !== 1 ? destination.cols || 1 : 1}
               rows={cols !== 1 ? destination.rows || 1 : 1}
-              onClick={() => navigate('/')}
+              component={NavLink} to={`/tours?destination=${destination._id}`}
             >
               {user && user.role === 'admin' && (
                 <Grid container spacing={2} style={{position: 'absolute', top: '10px', left: '10px', zIndex: 10}}>
