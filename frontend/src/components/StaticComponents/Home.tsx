@@ -5,7 +5,10 @@ import {styled} from "@mui/system";
 import {useNavigate} from "react-router-dom";
 import React from "react";
 import Partners from "../UI/Partners";
-import backgroundVideo from '../../assets/videos/background.mp4';
+import backgroundVideoMP4 from '../../assets/videos/background.mp4';
+import backgroundVideoWEBM from '../../assets/videos/background.webm';
+import backgroundVideoFLV from '../../assets/videos/background.flv';
+import backgroundVideoOGV from '../../assets/videos/background.ogv';
 import background from '../../assets/images/main-bg.png';
 
 
@@ -33,7 +36,12 @@ const Home = () => {
                  objectFit: 'cover',
                  zIndex: -1,
                }} autoPlay loop muted poster={background}>
-          <source src={backgroundVideo} type="video/mp4"/>
+          <source src={backgroundVideoMP4} type="video/mp4; codecs=&quot;theora, vorbis&quot;" />
+          <source src={backgroundVideoWEBM} type="video/webm; codecs=&quot;vp8, vorbis&quot;" />
+          <source src={backgroundVideoOGV} type="video/ogg; codecs=&quot;theora, vorbis&quot;" />
+          <object data={backgroundVideoMP4}>
+            <embed src={backgroundVideoFLV}/>
+          </object>
         </video>
         <Container
           maxWidth="xl"
