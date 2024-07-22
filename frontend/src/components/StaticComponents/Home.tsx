@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import React from "react";
 import Partners from "../UI/Partners";
 import backgroundVideo from '../../assets/videos/background.mp4';
+import background from '../../assets/images/main-bg.png';
 
 
 const CustomButton = styled(Button)({
@@ -31,7 +32,7 @@ const Home = () => {
                  height: '100%',
                  objectFit: 'cover',
                  zIndex: -1,
-               }} controls autoPlay loop muted>
+               }} autoPlay loop muted poster={background}>
           <source src={backgroundVideo} type="video/mp4"/>
         </video>
         <Container
