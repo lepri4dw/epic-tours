@@ -1,10 +1,10 @@
-import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {Tour} from "../../types";
-import {selectTours, selectToursFetching} from "./toursSlice";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {Tour} from "../../../types";
+import {selectTours, selectToursFetching} from "../toursSlice";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
-import {selectUser} from "../users/usersSlice";
+import {selectUser} from "../../users/usersSlice";
 import React, {useEffect} from "react";
-import {fetchTours} from "./toursThunks";
+import {fetchTours} from "../toursThunks";
 import {
   Box,
   Button,
@@ -16,9 +16,9 @@ import {
   ListItemButton, ListItemText,
   Typography
 } from "@mui/material";
-import TourItem from "./components/TourItem";
-import {selectDestinations, selectDestinationsFetching} from "../destiantions/destinationsSlice";
-import {fetchDestinations} from "../destiantions/destinationsThunks";
+import TourItem from "./TourItem";
+import {selectDestinations, selectDestinationsFetching} from "../../destiantions/destinationsSlice";
+import {fetchDestinations} from "../../destiantions/destinationsThunks";
 
 const ToursPage = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +33,7 @@ const ToursPage = () => {
   const destLoading = useAppSelector(selectDestinationsFetching);
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Прокрутка страницы вверх при изменении маршрута
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   useEffect(() => {

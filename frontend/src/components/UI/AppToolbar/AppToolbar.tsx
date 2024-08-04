@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Box,
   Container,
@@ -27,15 +27,30 @@ import { selectUnchecked } from '../../../features/notifications/notificationsSl
 import { fetchUncheckedCount } from '../../../features/notifications/notificationsThunks';
 import { logout } from '../../../features/users/usersThunks';
 
+type DebounceFunction = (...args: any[]) => void;
+
+const debounce = (func: DebounceFunction, wait: number): DebounceFunction => {
+  let timeout: NodeJS.Timeout;
+  return function executedFunction(...args: any[]) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
 const AppToolbar = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
   const user = useAppSelector(selectUser);
   const uncheckedCount = useAppSelector(selectUnchecked);
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [showInfoBlock, setShowInfoBlock] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     if (user && user.role === 'admin') {
@@ -47,6 +62,24 @@ const AppToolbar = () => {
       };
     }
   }, [dispatch, user, user?.role]);
+
+  const handleScroll = useCallback(
+    debounce(() => {
+      if (window.scrollY > 50) {
+        setShowInfoBlock(false);
+      } else {
+        setShowInfoBlock(true);
+      }
+    }, 200),
+    []
+  );
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -110,8 +143,8 @@ const AppToolbar = () => {
   );
 
   return (
-    <>
-      <Box sx={{ bgcolor: 'fff', py: 1, display: { xs: 'none', md: 'block' }, mb: 2 }}>
+    <Box sx={{position: 'sticky', WebkitPosition: 'sticky', top: 0, zIndex: 100}}>
+      {showInfoBlock && (<Box sx={{ bgcolor: '#fff', py: 1, display: { xs: 'none', md: 'block' }, mb: 2 }}>
         <Container>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
@@ -130,10 +163,9 @@ const AppToolbar = () => {
             </Grid>
           </Grid>
         </Container>
-      </Box>
-
-      <Box sx={{ maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>
-        <AppBar position="sticky" sx={{ mb: 2, boxShadow: '0 1rem 3rem rgba(0,0,0,.175)', background: '#fff', color: '#212121' }}>
+      </Box>)}
+      <Box sx={{ maxWidth: '1100px', margin: '0 auto', padding: '0 20px', position: 'relative' }}>
+        <AppBar position="sticky" sx={{ mb: 2, boxShadow: '0 1rem 3rem rgba(0,0,0,.175)', background: '#fff', color: '#212121', top: 0 }}>
           <Toolbar>
             <Grid container justifyContent="space-between" alignItems="center">
               <Grid item>
@@ -272,7 +304,7 @@ const AppToolbar = () => {
       >
         {drawerContent}
       </Drawer>
-    </>
+    </Box>
   );
 };
 

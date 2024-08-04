@@ -12,7 +12,7 @@ import {selectUser} from "./features/users/usersSlice";
 import NewTour from "./features/tours/components/NewTour";
 import EditTour from "./features/tours/components/EditTour";
 import EditDestination from "./features/destiantions/components/EditDestination";
-import ToursPage from "./features/tours/ToursPage";
+import ToursPage from "./features/tours/components/ToursPage";
 import NotificationsAdmin from "./features/notifications/NotificationsAdmin";
 import About from "./components/StaticComponents/About";
 import Footer from "./components/UI/Footer/Footer";
@@ -24,9 +24,7 @@ function App() {
   return (
     <>
       <CssBaseline/>
-      <header>
-        <AppToolbar/>
-      </header>
+      <AppToolbar/>
       <main>
           <Routes>
             <Route path="/" element={<Home/>}/>
