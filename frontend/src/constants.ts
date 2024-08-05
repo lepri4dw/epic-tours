@@ -1,1 +1,1 @@
-export const apiURL = 'https://89.191.225.99:8000';
+export const apiURL = 'https://www.epictourskg.com/api';
