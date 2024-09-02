@@ -19,7 +19,7 @@ const NewDestination: React.FC = () => {
 
   return (
     <Container>
-      <h1>Создать новое напhавление</h1>
+      <h1>Создать новое направление</h1>
       <DestinationForm onSubmit={onFormSubmit} />
     </Container>
   );

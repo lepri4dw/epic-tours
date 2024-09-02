@@ -29,15 +29,14 @@ import { logout } from '../../../features/users/usersThunks';
 
 type DebounceFunction = (...args: any[]) => void;
 
-const debounce = (func: DebounceFunction, wait: number): DebounceFunction => {
-  let timeout: NodeJS.Timeout;
+const throttle = (func: DebounceFunction, limit: number): DebounceFunction => {
+  let inThrottle: boolean;
   return function executedFunction(...args: any[]) {
-    const later = () => {
-      clearTimeout(timeout);
+    if (!inThrottle) {
       func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
   };
 };
 
@@ -64,18 +63,21 @@ const AppToolbar = () => {
   }, [dispatch, user, user?.role]);
 
   const handleScroll = useCallback(
-    debounce(() => {
+    throttle(() => {
       if (window.scrollY > 50) {
         setShowInfoBlock(false);
       } else {
         setShowInfoBlock(true);
       }
+      console.log(window.scrollY, showInfoBlock);
+
     }, 200),
     []
   );
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    console.log(window.scrollY, showInfoBlock, 2);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };

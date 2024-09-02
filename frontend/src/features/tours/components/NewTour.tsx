@@ -11,13 +11,12 @@ const NewTour: React.FC = () => {
   const navigate = useNavigate();
 
   const onFormSubmit = async (mutation: TourMutation) => {
-    console.log(mutation);
     await dispatch(createTour(mutation)).unwrap();
     navigate('/')
   };
 
   return (
-    <Container maxWidth="md">
+    <Container>
       <h1>Создать новый тур</h1>
       <TourForm onSubmit={onFormSubmit} />
     </Container>

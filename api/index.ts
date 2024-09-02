@@ -3,7 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import config from "./config";
 import usersRouter from "./routers/users";
-import destinationsRouter from "./routers/ destinations";
+import destinationsRouter from "./routers/destinations";
 import toursRouter from "./routers/tours";
 import notificationsRouter from "./routers/notifications";
 

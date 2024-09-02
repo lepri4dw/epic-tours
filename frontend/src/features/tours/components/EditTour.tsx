@@ -61,7 +61,7 @@ const EditTour = () => {
   }
 
   return (
-    <Container maxWidth="md">
+    <Container>
       <Grid container direction="column" spacing={2}>
         <Grid item xs>
           <Typography variant="h4">Редактировать объявление</Typography>

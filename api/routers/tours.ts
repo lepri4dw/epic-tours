@@ -5,7 +5,7 @@ import permit from '../middleware/permit';
 import {imagesUpload, UploadedFile} from "../multer";
 import Tour from '../models/Tour';
 import fs from 'fs/promises';
-import destinations from "./ destinations";
+import destinations from "./destinations";
 
 const toursRouter = express.Router();
 

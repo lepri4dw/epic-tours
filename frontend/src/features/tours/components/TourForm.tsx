@@ -30,9 +30,7 @@ const initialState: TourMutation = {
 
 const TourForm: React.FC<Props> = ({onSubmit, isEdit = false, existingTour = initialState}) => {
   const dispatch = useAppDispatch();
-  console.log(existingTour);
   const [state, setState] = useState<TourMutation>(existingTour);
-  console.log(state)
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const destinations = useAppSelector(selectDestinations);
   const error = useAppSelector(selectTourError);
@@ -248,6 +246,7 @@ const TourForm: React.FC<Props> = ({onSubmit, isEdit = false, existingTour = ini
                     name="dayNumber"
                     onChange={(e) => onScheduleChange(e, index)}
                     fullWidth
+                    required
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -257,6 +256,7 @@ const TourForm: React.FC<Props> = ({onSubmit, isEdit = false, existingTour = ini
                     name="title"
                     onChange={(e) => onScheduleChange(e, index)}
                     fullWidth
+                    required
                   />
                 </Grid>
                 <Grid item xs={2}>
@@ -277,6 +277,7 @@ const TourForm: React.FC<Props> = ({onSubmit, isEdit = false, existingTour = ini
                   fullWidth
                   multiline
                   rows={4}
+                  required
                 />
               </Grid>
             </Grid>
